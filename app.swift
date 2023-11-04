@@ -5,11 +5,11 @@ import Foundation
 /// Generiert Zahlenwörter im Bereich von 1-9999
 /// Quelle für die Zahlenwörter: https://en.wikipedia.org/wiki/IUPAC_numerical_multiplier
 
-func alsZahlenWort(_ eingabeZahl: Int) -> String {
+func griechischesZahlenwort(_ eingabeZahl: Int) -> String {
     // Die eingegebene Zahl wird in ihre Ziffern zerlegt
-    let zahlen = eingabeZahl.description.compactMap { Int(String($0)) }
+    let ziffern = eingabeZahl.description.compactMap { Int(String($0)) }
     // Falls die Zahl nicht im angegebenen Bereich liegt, wird kein Wort generiert.
-    guard zahlen.count < 5 && eingabeZahl != 0 else { return "Es konnte kein Zahlenwort generiert werden" }
+    guard ziffern.count < 5 && eingabeZahl != 0 else { return "Es konnte kein Zahlenwort generiert werden" }
     // Ausnahmen
     guard eingabeZahl != 1 else { return "mono" }
     guard eingabeZahl != 11 else { return "undeca" }
@@ -26,11 +26,10 @@ func alsZahlenWort(_ eingabeZahl: Int) -> String {
     var zahlenWort = ""
     // Das Zahlenarray wird umgedreht, damit zuerst die Ziffern mit geringerem Stellenwert kommen, da diese im Wort später vorne stehen.
     // Außerdem wird jeder Ziffer ihr Index mithilfe der enumerated-Funktion mitgegeben.
-    for ziffer in zahlen.reversed().enumerated() {
+    for ziffer in ziffern.reversed().enumerated() {
         // Wenn die Ziffer 0 ist, wird nichts hinzugefügt
         guard ziffer.element != 0 else { continue }
         zahlenWort.append(zahlenWoerter[ziffer.offset][ziffer.element - 1])
     }
     return zahlenWort
 }
-
